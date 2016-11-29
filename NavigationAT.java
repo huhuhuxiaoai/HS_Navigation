@@ -400,7 +400,7 @@ public class NavigationAT implements INavigation{
 				if (parkingSlotDetectionIsOn) {
 					//currentLine=0;
 					if ((this.pose.getX() >0.1) 
-							&& (this.pose.getX()<1.65)) {
+							&& (this.pose.getX()<1.77)) {
 						if ((this.pose.getHeading() > Math.PI * 0.01)
 								|| (this.pose.getHeading() < -Math.PI * 0.01)) {
 						//if(Math.abs(this.pose.getHeading())>Math.PI*0.01){
@@ -421,6 +421,9 @@ public class NavigationAT implements INavigation{
 						}
 						
 					}
+					if(this.pose.getX()>1.83){
+						xResult=1.8;
+					}
 						
 						
 							currentLine=0;
@@ -437,7 +440,7 @@ public class NavigationAT implements INavigation{
 			
 		if(currentLine==0){
 			if ((this.pose.getX() >0.03) 
-					&& (this.pose.getX()<1.65)) {
+					&& (this.pose.getX()<1.77)) {
 				if ((this.pose.getHeading() > Math.PI * 0.01)
 						|| (this.pose.getHeading() < -Math.PI * 0.01)) {
 					angleResult = 0;
@@ -448,6 +451,9 @@ public class NavigationAT implements INavigation{
 				if (this.pose.getY() > 0.01) {
 					yResult = 0;
 				}
+		}     
+			if(this.pose.getX()>=2.0){
+				xResult=1.8;
 			}
 			
 			currentLine=0;
@@ -491,7 +497,7 @@ public class NavigationAT implements INavigation{
             currentLine=1;
 			if (parkingSlotDetectionIsOn) {
 				xResult=1.78;
-				if ((this.pose.getY() > 0.05) && (this.pose.getY() < 0.58)) {
+				if ((this.pose.getY() > 0.05) && (this.pose.getY() < 0.65)) {
 					if ((this.pose.getHeading() < Math.PI * 0.49) || (this.pose.getHeading() > Math.PI * 0.51)) {
 						//angleResult = Math.PI * 0.5;
 						angleResult=0.5*Math.PI;
@@ -511,10 +517,10 @@ public class NavigationAT implements INavigation{
 		}
 		
 		if (currentLine== 1) {
-            xResult=1.78;
+           // xResult=1.78;
 			currentLine=1;
 			if (parkingSlotDetectionIsOn) {
-				if ((this.pose.getY() > 0.05) && (this.pose.getY() < 0.45)) {
+				if ((this.pose.getY() > 0.05) && (this.pose.getY() < 0.65)) {
 					if ((this.pose.getHeading() < Math.PI * 0.49) || (this.pose.getHeading() >Math.PI * 0.51)) {
 						angleResult =0.5*Math.PI;
 					}
@@ -537,14 +543,34 @@ public class NavigationAT implements INavigation{
 		 * line 2
 		 */
 
-		if ((this.pose.getHeading() > Math.PI * 0.85) && (this.pose.getHeading() < Math.PI * 1.10)
+		if ((this.pose.getHeading() > Math.PI * 0.85) && (this.pose.getHeading() < Math.PI * 1.136)
 				&& (currentLine== 1)) {
 			yResult = 0.60;
 			angleResult = Math.PI;
 			currentLine = 2;
 			if (parkingSlotDetectionIsOn) {
-				yResult=0.6;
-				if ((this.pose.getX() < 1.77) && (this.pose.getX() >1.51)) {
+				//yResult=0.6;
+				if ((this.pose.getX() < 1.85) && (this.pose.getX() >1.40)) {
+					if ((this.pose.getHeading()<Math.PI * 0.99) || (this.pose.getHeading() >Math.PI * 1.01)) {
+						angleResult = Math.PI;
+					}
+					if (this.pose.getY() < 0.59) {
+						yResult = 0.6;
+					}
+					if (this.pose.getY() > 0.61) {
+						yResult = 0.6;
+					}
+					
+				}
+				//currentLine = 2;
+			}
+
+		}
+		if (currentLine == 2) {
+              currentLine=2;
+              //yResult=0.6;
+			if (parkingSlotDetectionIsOn) {
+				if ((this.pose.getX() < 1.77) && (this.pose.getX() >1.40)) {
 					if ((this.pose.getHeading()<Math.PI * 0.99) || (this.pose.getHeading() >Math.PI * 1.01)) {
 						angleResult = Math.PI;
 					}
@@ -558,25 +584,6 @@ public class NavigationAT implements INavigation{
 				}
 				currentLine = 2;
 			}
-
-		}
-		if (currentLine == 2) {
-
-			if (parkingSlotDetectionIsOn) {
-				//if ((this.pose.getX() < 1.77) && (this.pose.getX() >1.51)) {
-					if ((this.pose.getHeading()<Math.PI * 0.99) || (this.pose.getHeading() >Math.PI * 1.01)) {
-						angleResult = Math.PI;
-					}
-					if (this.pose.getY() < 0.59) {
-						yResult = 0.6;
-					}
-					if (this.pose.getY() > 0.61) {
-						yResult = 0.6;
-					}
-					
-				//}
-				currentLine = 2;
-			}
 	
 			currentLine=2;
 
@@ -585,15 +592,16 @@ public class NavigationAT implements INavigation{
 		 * line 3
 		 */
 
-		if ((this.pose.getHeading() > Math.PI * 1.40) && (this.pose.getHeading() < Math.PI * 1.60)
+		if ((this.pose.getHeading() > Math.PI * 1.40) && (this.pose.getHeading() < Math.PI * 1.67)
 				 && (currentLine == 2)) {
 
 			xResult = 1.50;
 			angleResult = Math.PI * 1.5;
 			currentLine = 3;
 			if (parkingSlotDetectionIsOn) {
-				//if ((this.pose.getY() > 0.35) && (this.pose.getY() < 0.55)) {
+				if ((this.pose.getY() > 0.35) && (this.pose.getY() < 0.65)) {
 				  angleResult = Math.PI * 1.5;
+				  currentLine=3;
 					if ((this.pose.getHeading() < Math.PI * 1.49) || (this.pose.getHeading() >Math.PI * 1.51)) {
 						angleResult = Math.PI * 1.5;
 					}
@@ -607,7 +615,8 @@ public class NavigationAT implements INavigation{
 						yResult=0.3;
 					}
 					
-				//}
+				}
+			
 				
 				}
 			}
@@ -615,7 +624,8 @@ public class NavigationAT implements INavigation{
 			//
 			currentLine=3;
 			if (parkingSlotDetectionIsOn) {
-				//if ((this.pose.getY() > 0.35) && (this.pose.getY() < 0.55)) {
+				    currentLine=3;
+				if ((this.pose.getY() > 0.35) && (this.pose.getY() < 0.65)) {
 					if ((this.pose.getHeading() < Math.PI * 1.49) || (this.pose.getHeading() >Math.PI * 1.51)) {
 						angleResult = Math.PI * 1.5;
 					}
@@ -625,10 +635,10 @@ public class NavigationAT implements INavigation{
 					if (this.pose.getX() < 1.49) {
 						xResult = 1.50;
 					}
-					
-				//}
-				if(this.pose.getY()<0.3){
+					if(this.pose.getY()<0.3){
 					yResult=0.3;
+				}
+				
 				}
 			}
 			
@@ -644,9 +654,10 @@ public class NavigationAT implements INavigation{
 			  angleResult=Math.PI;
 			  
 			if (parkingSlotDetectionIsOn) {
-				yResult=0.3;
-				angleResult=Math.PI;
-				if ((this.pose.getX() <1.5) && (this.pose.getX() >0.35)) {
+				//yResult=0.3;
+				//angleResult=Math.PI;
+				currentLine=4;
+				if ((this.pose.getX() <1.65) && (this.pose.getX() >0.2)) {
 			
 					if ((this.pose.getHeading() < Math.PI * 0.99) || (this.pose.getHeading() > Math.PI * 1.01)) {
 						angleResult = Math.PI;
@@ -668,12 +679,12 @@ public class NavigationAT implements INavigation{
 		//Linien 4 noch Problem(Y(cm))
 		if (currentLine == 4) {
               currentLine=4;
-              angleResult=Math.PI;
-               yResult=0.3;
+              //angleResult=Math.PI;
+              // yResult=0.3;
 			if (parkingSlotDetectionIsOn) {
-				yResult=0.3;
-				if ((this.pose.getX() <1.55) && (this.pose.getX() >0.35)) {
-					yResult=0.3;//test
+				//yResult=0.3;
+				if ((this.pose.getX() <1.65) && (this.pose.getX() >0.2)) {
+					//yResult=0.3;//test
 					if ((this.pose.getHeading() < Math.PI * 0.99) 
 							|| (this.pose.getHeading()> Math.PI * 1.01)) {
 						    angleResult = Math.PI;
@@ -685,10 +696,7 @@ public class NavigationAT implements INavigation{
 						    yResult = 0.30;
 				     }
 				}
-				if(this.pose.getX()<0.3){
-					xResult=0.3;
-					yResult=0.3;
-				}
+				
 
                currentLine = 4;
 			}
@@ -750,7 +758,7 @@ public class NavigationAT implements INavigation{
 			angleResult=Math.PI;
 			currentLine = 6;
 			if (parkingSlotDetectionIsOn) {
-				if ((this.pose.getX() <0.25) && (this.pose.getX() >0.10)) {
+				//if ((this.pose.getX() <0.25) && (this.pose.getX() >0.10)) {
 					if ((this.pose.getHeading() > Math.PI *1.10) || (this.pose.getHeading()< Math.PI * 0.90)){
 						angleResult = Math.PI;
 					}
@@ -761,15 +769,16 @@ public class NavigationAT implements INavigation{
 					if (this.pose.getY() > 0.61) {
 						yResult = 0.6;
 					}
-				}
+				//}
 			
                  currentLine = 6;
 			}
 		}
 		if (currentLine == 6) {
 			  currentLine = 6;
+			 // yResult=0.6;
 			if (parkingSlotDetectionIsOn) {
-				if ((this.pose.getX() <0.25) && (this.pose.getX() >0.10)) {
+				if ((this.pose.getX() <0.3) && (this.pose.getX() >0.08)) {
 					if ((this.pose.getHeading() > Math.PI *1.10) || (this.pose.getHeading()< Math.PI * 0.90)){
 						angleResult = Math.PI;
 					}
